@@ -2,7 +2,7 @@ export default async function BlogPage({ params }) {
   const { slug } = params;
 
   const response = await fetch(
-    `https://your-strapi-url/api/articles?filters[slug][$eq]=${slug}&populate[blocks][populate]=*`
+    `https://tidy-attraction-06e886b553.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[blocks][populate]=*`
   );
   const result=await response.json(); // changing data into readable format
   const blogs=result.data[0]; //extracting blog posts
