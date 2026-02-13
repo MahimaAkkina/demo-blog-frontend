@@ -6,6 +6,7 @@ export default async function Home() {
   );
   const result = await response.json();
   const blogs = result.data;
+  console.log(blogs)
 
   return (
     <div>
@@ -13,14 +14,18 @@ export default async function Home() {
 
       {blogs.map((blog) => (
         <div key={blog.id} className="my-4">
-          <Link href={`/blog/${blog.slug}`}>
+          <Link href={`/blogs/${blog.slug}`}>
             <h2 className="text-xl text-blue-500 cursor-pointer">
               {blog.title}
             </h2>
           </Link>
           <p>{blog.description}</p>
         </div>
+        
       ))}
     </div>
+    
   );
+  
 }
+
