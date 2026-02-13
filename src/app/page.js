@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function Home() {
   const response = await fetch(
-    "https://your-strapi-url/api/articles?populate=*"
+    "https://tidy-attraction-06e886b553.strapiapp.com/api/articles?populate=*"
   );
   const result = await response.json();
   const blogs = result.data;
