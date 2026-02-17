@@ -1,3 +1,6 @@
+import RichTextBlock from "@/app/components/RichTextBlock";
+
+
 // Next.js automatically passes dynamic route values through `params`
 // We use it to access values like id, slug etc from the URL
 
@@ -15,15 +18,31 @@ export default async function BlogPage({params}) {
     <div>
       <h1 className="text-4xl font-bold">{blog.title}</h1>
 
-      {blog.blocks?.map((block, index) => {
-        if (block.__component === "shared.rich-text") {
-          return (
-            <div key={index}>
-              <p>{block.body}</p>
-            </div>
-          );
+      {blog.blocks?.map((block, index) => { //blocks is array of components.
+        switch (block.__component){
+          case "shared.rich-text":
+            return <RichTextBlock key={index} data={block} />;
+
+            case "shared.media":
+              return(
+                <div key={index} className="mb-5">
+                  <img 
+                    src={block.image?.url}
+                    alt={block.image?.alternativeText}
+                    className="w-full rounded-xl"
+                  />
+                </div>
+              );
+
+              case "shared.quote":
+                return(
+                  <blockquote key={index} className="border-l-4 pl-4 italic text-gray-600 mb-5">
+                    {block.quote}
+                  </blockquote>
+                );
+                default:
+                  return null;
         }
-        return null;
       })}
     </div>
   );
