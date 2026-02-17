@@ -1,17 +1,21 @@
-export default async function BlogPage({ params }) {
+// Next.js automatically passes dynamic route values through `params`
+// We use it to access values like id, slug etc from the URL
+
+export default async function BlogPage({params}) {
   const { slug } = params;
 
   const response = await fetch(
-    `https://tidy-attraction-06e886b553.strapiapp.com/api/articles?filters[slug][$eq]=${slug}&populate[blocks][populate]=*`
+    `https://tidy-attraction-06e886b553.strapiapp.com/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[blocks][populate]=*`, //filtering blog posts - encodeURIComponent() converts special characters into a URL-safe format.
+    {cache:"no-store"} //Always fetch fresh data from the server.
   );
   const result=await response.json(); // changing data into readable format
   const blog=result.data[0]; //extracting blog posts
   if (!blog) return <div>Blog not found</div>; 
   return (
     <div>
-      <h1 className="text-4xl font-bold">{blog.title}</h1>
+      <h1 className="text-4xl font-bold">{blog.attributes.title}</h1>
 
-      {blog.blocks?.map((block, index) => {
+      {blog.attributes.blocks?.map((block, index) => {
         if (block.__component === "shared.rich-text") {
           return (
             <div key={index}>
@@ -19,7 +23,6 @@ export default async function BlogPage({ params }) {
             </div>
           );
         }
-
         return null;
       })}
     </div>
