@@ -13,9 +13,9 @@ export default async function BlogPage({params}) {
   if (!blog) return <div>Blog not found</div>; 
   return (
     <div>
-      <h1 className="text-4xl font-bold">{blog.attributes.title}</h1>
+      <h1 className="text-4xl font-bold">{blog.title}</h1>
 
-      {blog.attributes.blocks?.map((block, index) => {
+      {blog.blocks?.map((block, index) => {
         if (block.__component === "shared.rich-text") {
           return (
             <div key={index}>
