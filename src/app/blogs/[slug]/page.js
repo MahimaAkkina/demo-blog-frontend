@@ -2,7 +2,7 @@
 // We use it to access values like id, slug etc from the URL
 
 export default async function BlogPage({params}) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const response = await fetch(
     `https://tidy-attraction-06e886b553.strapiapp.com/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[blocks][populate]=*`, //filtering blog posts - encodeURIComponent() converts special characters into a URL-safe format.
