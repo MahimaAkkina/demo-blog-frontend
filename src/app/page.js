@@ -5,9 +5,9 @@ export default async function Home() { // timetaken for fetching data from strap
     "https://tidy-attraction-06e886b553.strapiapp.com/api/articles?populate=*", // populate=* it gives all fields
     {cache:"no-store"}
   );
+
   const result = await response.json(); // turning raw data in readable json format
   const blogs = result.data;
-  console.log(blogs) // loop
 
   return (
     <div className="p-6">
