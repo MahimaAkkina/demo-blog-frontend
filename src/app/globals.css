@@ -1,6 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+
+.custom-swiper .swiper-button-next,
+.custom-swiper .swiper-button-prev {
+  color: #f9b807;  
+  width: 30px;
+  height: 30px;
+  transform: scale(0.8);
+}
+
+
 /* 
 :root {
   --background: #ffffff;
